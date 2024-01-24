@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout
 from PyQt6.QtWidgets import QLabel, QPushButton, QLineEdit, QComboBox
+from PyQt6.QtCore import Qt
 from bs4 import BeautifulSoup
 import requests
 
@@ -30,26 +31,35 @@ window.setWindowTitle("Currency Converter")
 
 layout = QVBoxLayout()
 
+layout1 = QHBoxLayout()
+layout.addLayout(layout1)
+
+output_label = QLabel("")
+layout.addWidget(output_label)
+
+layout2 = QVBoxLayout()
+layout1.addLayout(layout2)
+
+layout3 = QVBoxLayout()
+layout1.addLayout(layout3)
+
 in_combo = QComboBox()
 currencies = ["USD","EUR","TRY","GBP"]
 in_combo.addItems(currencies)
-layout.addWidget(in_combo)
+layout2.addWidget(in_combo)
 
 target_combo = QComboBox()
 currencies = ["USD","EUR","TRY","GBP"]
 target_combo.addItems(currencies)
-layout.addWidget(target_combo)
+layout2.addWidget(target_combo)
 
 text = QLineEdit()
-layout.addWidget(text)
+layout3.addWidget(text)
 
 btn = QPushButton("Convert")
-layout.addWidget(btn)
+layout3.addWidget(btn, alignment=Qt.AlignmentFlag.AlignBottom)
 
 btn.clicked.connect(show_currency)
-
-output_label = QLabel("")
-layout.addWidget(output_label)
 
 window.setLayout(layout)
 window.show()
